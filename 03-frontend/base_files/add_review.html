@@ -7,9 +7,17 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <header>
+        <img class="logo" src="./logo.png" alt="Application Logo">
+        <nav>
+            <a href="index.html"></a>
+            <a href="about.html"></a>
+        </nav>
+        <a class="login-button" href="login.html" id="login-link">Login</a>
+    </header>
     <main>
         <form id="review-form">
-            <h2>Add a Review</h2>
+            <h1>Add a Review</h1>
             <label for="place">Place:</label>
             <input type="text" id="place" name="place" readonly>
             
@@ -20,5 +28,8 @@
         </form>
     </main>
     <script src="scripts.js"></script>
+    <footer>
+        <p>© 2024 HBnB Evolution. All rights reserved.</p>
+    </footer>
 </body>
 </html>

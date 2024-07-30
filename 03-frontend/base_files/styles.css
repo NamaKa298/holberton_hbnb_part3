@@ -1,0 +1,216 @@
+/* Reset */
+body, h1, h2, h3, p, a, img, div, footer {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #ff6f00;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header img.logo {
+    height: 50px;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+}
+
+header a.login-button {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+    padding: 20px;
+    padding-bottom: 60px;
+    overflow: auto;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#filter {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#filter select {
+    background-color: white;
+    color: black; 
+    padding: 5px;
+    border: none; /* Retire la bordure par défaut */
+    border-radius: 5px; /* Ajoute des coins arrondis */
+}
+
+#places-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap; /* Facultatif */
+}
+
+.place-card {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    height: 300px;
+    text-align: center;
+    line-height: 3;
+}
+
+.place-card img, .place-image-large {
+    max-width: 100%;
+    border-radius: 10px 10px 0 0;
+}
+
+.place-card h3 {
+    margin: 15px 0;
+}
+
+.details-button {
+    background-color: #ff6f00;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.details-button:hover {
+    background-color: #e65c00;
+}
+
+footer {
+    background-color: #ff6f00;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+#review-form {
+    padding: 10px 20px;
+}
+
+.place-details {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+    line-height: 3;
+}
+
+.review-card, .place-card {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.main-login-button, .email, .password, #place, #review, #rating {
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin: 20px;
+    padding: 5px;
+}
+
+
+#review-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#review-form label {
+    font-weight: bold;
+}
+
+#review-form input,
+#review-form textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#review-form button, #login-form button {
+    background-color: #ff6f00;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    margin: 0 auto;
+}
+
+#review-form button:hover, #login-form button:hover {
+    background-color: white;
+}
+
+#review-form, #login-form {
+    display: flex;
+    flex-direction: column;
+}
+#review-form button, #login-form button {
+    align-self: center;
+}
+
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+.star-rating input[type="radio"] {
+    display: none;
+}
+.star-rating label {
+    font-size: 2em;
+    color: #ddd;
+    cursor: pointer;
+}
+.star-rating input[type="radio"]:checked ~ label {
+    color: #ff6f00;
+}
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: #ff6f00;
+}
+
+.star-display {
+    display: flex;
+    justify-content: left;
+}
+.star-display .star {
+    font-size: 2em;
+    color: #ddd;
+}
+.star-display .star.active {
+    color: black;
+}
