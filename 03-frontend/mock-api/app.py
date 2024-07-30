@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 import json
+import os
 from uuid import uuid4
 
 app = Flask(__name__)
@@ -8,11 +9,26 @@ app.config.from_object('config.Config')
 
 jwt = JWTManager(app)
 
-with open('data/users.json') as f:
+# Get the directory of the current script
+base_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Construct the full path to the users.json file
+users_file_path = os.path.join(base_dir, 'data/users.json')
+
+with open(users_file_path) as f:
     users = json.load(f)
 
-with open('data/places.json') as f:
+# Construct the full path to the places.json file
+places_file_path = os.path.join(base_dir, 'data/places.json')
+
+with open(places_file_path) as f:
     places = json.load(f)
+
+# Route for the root URL
+@app.route('/')
+def home():
+    return "Welcome to the Flask API!"
+
 
 # In-memory storage for new reviews
 new_reviews = []
