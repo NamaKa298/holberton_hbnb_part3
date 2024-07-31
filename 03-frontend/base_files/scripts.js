@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const success = await loginUser(email, password);
 
                 if (success) {
-                    window.location.href = 'index.html';
+                    window.location.href = '/base_files/index.html';
                 } else {
                     alert('Login failed. Please check your credentials and try again.');
                 }
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function loginUser(email, password) {
-    const response = await fetch('https://your-api-url/login', {
+    const response = await fetch('http://127.0.0.1:5000/users', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -36,7 +36,7 @@ async function loginUser(email, password) {
         const data = await response.json();
         document.cookie = `token=${data.access_token}; path=/`;
         console.log('Cookie set:', document.cookie);
-        window.location.href = 'index.html';
+        window.location.href = '/base_file/index.html';
     } else {
         alert('Login failed: ' + response.statusText);
     }
