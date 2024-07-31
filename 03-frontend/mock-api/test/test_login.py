@@ -16,6 +16,7 @@ for user in users:
     if response.status_code == 200:
         print(f"Login successful for {user['email']}")
         print(f"Token: {response.json()['access_token']}\n")
+        print(f"Cookies: {response.cookies}\n")
     else:
         print(f"Login failed for {user['email']}")
         print(f"Response: {response.json()}\n")

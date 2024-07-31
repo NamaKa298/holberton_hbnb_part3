@@ -35,6 +35,7 @@ async function loginUser(email, password) {
     if (response.ok) {
         const data = await response.json();
         document.cookie = `token=${data.access_token}; path=/`;
+        console.log('Cookie set:', document.cookie);
         window.location.href = 'index.html';
     } else {
         alert('Login failed: ' + response.statusText);
