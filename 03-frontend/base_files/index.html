@@ -21,27 +21,26 @@
             <label for="country-filter">Filter by Country:</label>
             <select id="country-filter">
                 <option value="all" selected>All</option>
-                <option value="Los Angeles">Los Angeles</option>
-                <option value="Toronto">Toronto</option>
-                <option value="New York">New York</option>
+                <option value="united states">United States</option>
+                <option value="canada">Canada</option>
             </select>
         </section>
         <section id="places-list">
-            <div class="place-card">
+            <div class="place-card" data-country="united states">
                 <img class="place-image" src="beach.jpg" >
                 <h2>Beautiful Beach House</h2>
                     <p>Price per night: $150</p>
-                    <p>Location: Los Angeles, United Sates</p>
+                    <p>Location: Los Angeles, United States</p>
                     <button class="details-button">View Details</button>
             </div>
-            <div class="place-card">
+            <div class="place-card" data-country="canada">
                 <img class="place-image" src="cabin.jpg">
                 <h2>Cozy Cabin</h2>
                     <p>Price per night: $100</p>
                     <p>Location: Toronto, Canada</p>
                     <button class="details-button">View Details</button>
             </div>
-            <div class="place-card">
+            <div class="place-card" data-country="canada">
                 <img class="place-image" src="apartment.jpg">
                 <h2>Modern Apartment</h2>
                     <p>Price per night: $200</p>
