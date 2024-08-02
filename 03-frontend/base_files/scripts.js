@@ -2,6 +2,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     checkAuthentication();
     fetchPlaces();
+
     const loginForm = document.getElementById('login-form');
 
     if (loginForm) {
@@ -24,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('An error occurred. Please try again.');
             }
         });
+        setPlacesCountries();
     }
 });
 
@@ -49,23 +51,9 @@ async function loginUser(email, password) {
 function checkAuthentication() {
     const token = getCookie('token');
     const loginLink = document.getElementById('login-link');
-   
 
-    if (loginLink) {
-        if (!token) {
-            loginLink.style.display = 'block';
-
-        } else {
-            loginLink.style.display = 'none';
-            // Fetch places data if the user is authenticated
-            fetchPlaces(token);
-          // Store the token for later use
-          fetchPlaceDetails(token, placeId);
-        }
-        return token;
-    } else {
-        console.error('Login link not found');
-    }
+    if (!token && loginLink) loginLink.style.display = 'block';
+    return token;
 }
 
 function getCookie(name) {
@@ -91,6 +79,7 @@ async function fetchPlaces() {
 
 function displayPlaces(places) {
     const placesList = document.getElementById('places-list');
+    if (!placesList) return;
     placesList.innerHTML = ''; // Clear the current content of the places list
 
     places.forEach(place => {
@@ -103,24 +92,82 @@ function displayPlaces(places) {
             <p><strong>Location:</strong> ${place.city_name}, ${place.country_name}</p>
             <p><strong>Price per night:</strong> $${place.price_per_night}</p>
             <p><strong>Max guests:</strong> ${place.max_guests}</p>
-            <button class="details-button" data-id="${place.id}">View Detail</button>
+            <a href="place.html?id=${place.id}">View Details</a>
         `;
 
         placesList.appendChild(placeDiv);
     });
 }
 
-document.getElementById('country-filter').addEventListener('change', (event) => {
-    const selectedCountry = event.target.value.toLowerCase();
-    const places = document.querySelectorAll('.place-card');
-
-    places.forEach(place => {
-        const placeCountry = place.getAttribute('data-country').toLowerCase();
-        if (selectedCountry === '' || placeCountry === selectedCountry) {
-            place.style.display = 'block';
-        } else {
-            place.style.display = 'none';
-        }
+function setPlacesCountries() {
+    const contryFilter = document.getElementById('country-filter');
+    if (!contryFilter) {
+        console.error('Element with ID "country-filter" not found.');
+        return;
+    };
+    contryFilter.addEventListener('change', (event) => {
+        const selectedCountry = event.target.value.toLowerCase();
+        const places = document.querySelectorAll('.place-card');
+    
+        places.forEach(place => {
+            const placeCountry = place.getAttribute('data-country').toLowerCase();
+            if (selectedCountry === '' || placeCountry === selectedCountry) {
+                place.style.display = 'block';
+            } else {
+                place.style.display = 'none';
+            }
+        });
     });
-});
+}
 
+//tâche 3
+
+function getPlaceIdFromURL() {
+    const placeId = window.location.search.split('=')[1];
+    return placeId;
+}
+
+async function fetchPlaceDetails(placeId) {
+    try {
+        const response = await fetch(`http://127.0.0.1:5000/places/${placeId}`);
+        if (response.ok) {
+            const placeDetails = await response.json();
+            displayPlaceDetails(placeDetails);
+        } else {
+            console.error('Failed to fetch place details:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error fetching place details:', error);
+    }
+}
+
+function displayPlaceDetails(place) {
+    const placeDetailsSection = document.getElementById('place-details');
+    placeDetailsSection.innerHTML = ''; // Clear the current content of the place details section
+
+    // Create elements to display the place details
+    const placeName = document.createElement('h1');
+    placeName.textContent = place.name;
+
+    const placeDescription = document.createElement('p');
+    placeDescription.innerHTML = `<strong>Description:</strong> ${place.description}`;
+
+    const placeLocation = document.createElement('p');
+    placeLocation.innerHTML = `<strong>Location:</strong> ${place.city_name}, ${place.country_name}`;
+
+    const placePrice = document.createElement('p');
+    placePrice.innerHTML = `<strong>Price per night:</strong> $${place.price_per_night}`;
+
+    const placeAmenities = document.createElement('p');
+    placeAmenities.innerHTML = `<strong>Amenities:</strong> ${place.amenities.join(', ')}`;
+
+    // Append the created elements to the place details section
+    placeDetailsSection.appendChild(placeName);
+    placeDetailsSection.appendChild(placeDescription);
+    placeDetailsSection.appendChild(placeLocation);
+    placeDetailsSection.appendChild(placePrice);
+    placeDetailsSection.appendChild(placeAmenities);
+}
+
+
+//tâche 4
